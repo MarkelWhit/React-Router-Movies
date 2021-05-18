@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Route, Link, Switch } from 'react-router-dom'
 import SavedList from './Movies/SavedList';
 import MovieList from './Movies/MovieList';
+import Movie from './Movies/Movie';
 export default function App() {
   const [saved, setSaved] = useState([]); // Stretch: the ids of "saved" movies
   const [movieList, setMovieList] = useState([]);
@@ -30,15 +31,20 @@ export default function App() {
 
   return (
     <div>
+      <SavedList list={[]}/>
+      <Link exact to='/'> 
       
-      <Link to='/'>MovieList
       </Link>
-      <Link to ='/:id/movies'>Movies</Link>
-        <SavedList  list={[]} />
+      <Link to ='/movies:movieID'></Link>
+       
       <Route path='/' render={props => {
         return <MovieList 
         {...props}
-        movies={setMovieList} />}}/>
+        movies={movieList} />}}/>
+      <Route path ='/movies:movie${id}' render={props => {
+        return <Movie 
+        {...props}/>
+      }}/>
 
     </div>
   );
